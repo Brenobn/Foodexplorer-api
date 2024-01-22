@@ -1,0 +1,11 @@
+{
+  "name": "foodexplorer-api",
+  "version": "1.0.0",
+  "description": "Api desenvolvida para atender requisições de um app E-comerce",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Breno Leonardo",
+  "license": "ISC"
+}
