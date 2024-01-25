@@ -43,6 +43,16 @@ class DishesController {
 
     return response.json();
   }
+
+  async index(request, response) {
+    const { name } = request.query;
+
+    const dishes = await knex("dishes")
+    .where({ name })
+    .orderBy("name");
+
+    return response.json(dishes);
+  }
 }
 
 module.exports = DishesController;
