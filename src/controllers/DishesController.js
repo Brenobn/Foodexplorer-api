@@ -48,8 +48,15 @@ class DishesController {
     const { name } = request.query;
 
     const dishes = await knex("dishes")
-    .whereLike("name", `%${name}%`)
-    .orderBy("name");
+      .select([
+        "dishes.id",
+        "dishes.name",
+        "dishes.description",
+        "dishes.image",
+        "dishes.price",
+        "dishes.category"
+      ])
+      .whereLike("dishes.name", `%${name}%`)
 
     return response.json(dishes);
   }
