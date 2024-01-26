@@ -46,7 +46,7 @@ class DishesController {
 
   async index(request, response) {
     const { name } = request.query;
-
+   
     const dishes = await knex("dishes")
       .select([
         "dishes.id",
@@ -58,7 +58,16 @@ class DishesController {
       ])
       .whereLike("dishes.name", `%${name}%`)
 
-    return response.json(dishes);
+    const dishWithIngredients = await Promise.all(dishes.map(async (dish) => {
+      const ingredients = await knex("ingredients").where({ dish_id: dish.id });
+  
+      return {
+        ...dish,
+        ingredients
+      };
+    }));
+  
+    return response.json(dishWithIngredients);
   }
 }
 
